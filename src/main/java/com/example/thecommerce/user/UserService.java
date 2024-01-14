@@ -1,7 +1,10 @@
 package com.example.thecommerce.user;
 
 import com.cloudinary.Cloudinary;
+import com.example.thecommerce.city.CityRepository;
+import com.example.thecommerce.enums.UserRoles;
 import com.example.thecommerce.exception.NotFoundException;
+import com.example.thecommerce.nation.NationRepository;
 import com.example.thecommerce.payloads.entities.UserRegistrationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +24,8 @@ public class UserService {
     private UserRepository utenteRepository;
 @Autowired
 private NationRepository nationRepository;
+@Autowired
+private CityRepository cityRepository;
     @Autowired
     private Cloudinary cloudinary;
 
@@ -52,7 +57,7 @@ private NationRepository nationRepository;
         found.setEtà(body.età());
         found.setEmail(body.email());
         found.setNazione(nationRepository.findById(body.nazione()).get());
-        found.setCitta(cittaRepository.findById(body.citta()).get());
+        found.setCitta(cityRepository.findById(body.citta()).get());
         //found.setPassword(bcrypt.encode(body.getPassword()));
   found.setRole(UserRoles.valueOf(body.role()));
         return utenteRepository.save(found);

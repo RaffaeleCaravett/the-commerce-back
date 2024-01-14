@@ -2,8 +2,11 @@ package com.example.thecommerce.user;
 
 
 import com.example.thecommerce.city.City;
+import com.example.thecommerce.comment.Comment;
 import com.example.thecommerce.enums.UserRoles;
+import com.example.thecommerce.like.Like;
 import com.example.thecommerce.nation.Nation;
+import com.example.thecommerce.notification.Notification;
 import com.example.thecommerce.rating.Rating;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
