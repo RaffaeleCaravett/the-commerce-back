@@ -1,5 +1,7 @@
 package com.example.thecommerce.auth;
 
+import com.example.thecommerce.exception.BadRequestException;
+import com.example.thecommerce.exception.UnauthorizedException;
 import com.example.thecommerce.payloads.entities.Token;
 import com.example.thecommerce.payloads.entities.UserLoginDTO;
 import com.example.thecommerce.payloads.entities.UserRegistrationDTO;
@@ -53,15 +55,15 @@ public class AuthService {
         userRepository.findByEmail(body.email()).ifPresent( user -> {
             throw new BadRequestException("L'email " + user.getEmail() + " è già utilizzata!");
         });
-        User found = utenteRepository.findById(id).get();
-        found.setNomeCompleto(body.nomeCompleto());
-        found.setEtà(body.età());
-        found.setEmail(body.email());
-        found.setNazione(nationRepository.findById(body.nazione()).get());
-        found.setCitta(cittaRepository.findById(body.citta()).get());
+        User newUser = new User();
+        newUser.setNomeCompleto(body.nomeCompleto());
+        newUser.setEtà(body.età());
+        newUser.setEmail(body.email());
+        newUser.setNazione(nationRepository.findById(body.nazione()).get());
+        newUser.setCitta(cittaRepository.findById(body.citta()).get());
         //found.setPassword(bcrypt.encode(body.getPassword()));
-        found.setRole(UserRoles.valueOf(body.role()));
-        userRepository.save(found);
+        newUser.setRole(UserRoles.valueOf(body.role()));
+        userRepository.save(newUser);
 
 
         return newUser;

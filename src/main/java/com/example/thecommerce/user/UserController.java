@@ -1,6 +1,7 @@
 package com.example.thecommerce.user;
 
 
+import com.example.thecommerce.exception.NotFoundException;
 import com.example.thecommerce.payloads.entities.UserRegistrationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

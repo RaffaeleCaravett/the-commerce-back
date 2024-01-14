@@ -1,10 +1,13 @@
 package com.example.thecommerce.auth;
 
 
+import com.example.thecommerce.exception.BadRequestException;
 import com.example.thecommerce.payloads.entities.Token;
 import com.example.thecommerce.payloads.entities.UserLoginDTO;
 import com.example.thecommerce.payloads.entities.UserLoginSuccessDTO;
 import com.example.thecommerce.payloads.entities.UserRegistrationDTO;
+import com.example.thecommerce.rating.Rating;
+import com.example.thecommerce.rating.RatingService;
 import com.example.thecommerce.user.User;
 import com.example.thecommerce.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,8 @@ public class AuthController {
 
     @Autowired
     private UserService utenteService;
-
+    @Autowired
+    private RatingService ratingService;
 
 
     @PostMapping("/login")
@@ -76,21 +80,6 @@ public class AuthController {
                                    @RequestParam(defaultValue = "id") String orderBy){
         return ratingService.getRatings(page, size, orderBy);
     }
-    @GetMapping("/search")
-    public Page<User> searchByParams(@RequestParam(required = false) String nome,
-                                     @RequestParam(required = false) String cognome,
-                                     @RequestParam(required = false) String nazione,
-                                     @RequestParam(required = false) String continent,
-                                     @RequestParam(required = false) String email,
-                                     @RequestParam(required = false) int eta,
-                                     @RequestParam(defaultValue = "ASC") String direction,
-                                     @RequestParam(defaultValue = "id") String sort,
-                                     Pageable pageable) {
 
-        Sort.Direction sortDirection = Sort.Direction.fromString(direction);
-        Pageable modifiedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sortDirection, sort);
 
-        Page<User> result = authService.findByDynamicParams(nome, cognome, nazione, continent, email, eta, modifiedPageable);
-        return result;
-    }
 }

@@ -1,16 +1,8 @@
 package com.example.thecommerce.user;
 
-import com.example.unbreackable.chat.Chat;
-import com.example.unbreackable.comment.Comment;
-import com.example.unbreackable.continent.Continent;
-import com.example.unbreackable.enums.UserRoles;
-import com.example.unbreackable.friendship.Friendship;
-import com.example.unbreackable.like.Like;
-import com.example.unbreackable.message.Message;
-import com.example.unbreackable.nations.Nation;
-import com.example.unbreackable.notification.Notification;
-import com.example.unbreackable.rating.Rating;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.example.thecommerce.enums.UserRoles;
+import com.example.thecommerce.rating.Rating;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
