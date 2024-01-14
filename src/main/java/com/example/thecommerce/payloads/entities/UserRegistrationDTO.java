@@ -12,14 +12,10 @@ public record UserRegistrationDTO(
         @NotEmpty(message = "La password è un campo obbligatorio!")
         String password,
         @NotEmpty(message = "Il nome è un campo obbligatorio!")
-        String nome,
-        @NotEmpty(message = "Il cognome è un campo obbligatorio!")
-        String cognome,
-        @NotNull(message = "Il continente è un campo obbligatorio!")
-        Long continente,
+        String nomeCompleto,
+        @NotNull(message = "La città è un campo obbligatorio!")
+        Long citta,
         @NotNull(message = "La nazione è un campo obbligatorio!")
-        Long nazione,
-        String img_profilo,
-        String description
+        Long nazione
 ) {
 }

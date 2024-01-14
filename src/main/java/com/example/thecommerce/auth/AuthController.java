@@ -8,6 +8,7 @@ import com.example.thecommerce.payloads.entities.UserLoginSuccessDTO;
 import com.example.thecommerce.payloads.entities.UserRegistrationDTO;
 import com.example.thecommerce.rating.Rating;
 import com.example.thecommerce.rating.RatingService;
+import com.example.thecommerce.security.JWTTools;
 import com.example.thecommerce.user.User;
 import com.example.thecommerce.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

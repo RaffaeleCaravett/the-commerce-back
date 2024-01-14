@@ -1,10 +1,14 @@
 package com.example.thecommerce.auth;
 
+import com.example.thecommerce.city.CityRepository;
+import com.example.thecommerce.enums.UserRoles;
 import com.example.thecommerce.exception.BadRequestException;
 import com.example.thecommerce.exception.UnauthorizedException;
+import com.example.thecommerce.nation.NationRepository;
 import com.example.thecommerce.payloads.entities.Token;
 import com.example.thecommerce.payloads.entities.UserLoginDTO;
 import com.example.thecommerce.payloads.entities.UserRegistrationDTO;
+import com.example.thecommerce.security.JWTTools;
 import com.example.thecommerce.user.User;
 import com.example.thecommerce.user.UserRepository;
 import com.example.thecommerce.user.UserService;
@@ -34,6 +38,8 @@ public class AuthService {
 
     @Autowired
     private NationRepository nationRepository;
+    @Autowired
+    private CityRepository cityRepository;
 
     public Token authenticateUser(UserLoginDTO body) throws Exception {
         // 1. Verifichiamo che l'email dell'utente sia nel db
@@ -60,9 +66,9 @@ public class AuthService {
         newUser.setEtà(body.età());
         newUser.setEmail(body.email());
         newUser.setNazione(nationRepository.findById(body.nazione()).get());
-        newUser.setCitta(cittaRepository.findById(body.citta()).get());
+        newUser.setCitta(cityRepository.findById(body.citta()).get());
         //found.setPassword(bcrypt.encode(body.getPassword()));
-        newUser.setRole(UserRoles.valueOf(body.role()));
+        newUser.setRole(UserRoles.UTENTE);
         userRepository.save(newUser);
 
 

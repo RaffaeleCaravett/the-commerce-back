@@ -1,7 +1,9 @@
 package com.example.thecommerce.user;
 
 
+import com.example.thecommerce.city.City;
 import com.example.thecommerce.enums.UserRoles;
+import com.example.thecommerce.nation.Nation;
 import com.example.thecommerce.rating.Rating;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -35,7 +37,7 @@ public class User implements UserDetails {
     private Nation nazione;
     @ManyToOne
     @JoinColumn(name = "nation_id")
-    private Citta citta;
+    private City citta;
 
     @Column(name = "nomeCompleto", length = 255)
     private String nomeCompleto;
