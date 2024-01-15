@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "products")
 @Getter
@@ -24,7 +26,7 @@ public class Product {
     @JoinTable(name="product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Category category;
+    private List<Category> category;
     @ManyToOne
     @JoinColumn(name = "società_id")
     private Società società;
