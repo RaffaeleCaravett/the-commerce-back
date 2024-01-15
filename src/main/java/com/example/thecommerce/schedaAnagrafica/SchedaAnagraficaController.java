@@ -24,7 +24,7 @@ SchedaAnagraficaRepository schedaAnagraficaRepository;
 @GetMapping("/{id}")
 @PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
     public SchedaAnagrafica getById(@PathVariable long id){
-    return this.schedaAnagraficaService.findById(id);
+    return schedaAnagraficaService.findById(id);
 }
 
 @PostMapping("")
@@ -49,19 +49,36 @@ public long save(@RequestBody @Validated SchedaAnagraficaDTO schedaAnagraficaDTO
         throw new BadRequestException("Deve esserci almeno il Codice Fiscale o la partita Iva");
     }
 
-    schedaAnagrafica.setNome(schedaAnagraficaDTO.nome());
-    schedaAnagrafica.setCognome(schedaAnagraficaDTO.cognome());
-    schedaAnagrafica.setEmail(schedaAnagraficaDTO.email());
-    schedaAnagrafica.setRole(UserRoles.valueOf(schedaAnagraficaDTO.role()));
-    schedaAnagrafica.setCap(schedaAnagraficaDTO.cap());
-    if(schedaAnagraficaDTO.capitaleSociale()!=0){
-        schedaAnagrafica.setCapitaleSociale(schedaAnagraficaDTO.capitaleSociale());
-    }
-    schedaAnagrafica.setIndirizzo(schedaAnagraficaDTO.indirizzo());
-    schedaAnagrafica.setNumeroCivico(schedaAnagraficaDTO.numeroCivico());
-    schedaAnagrafica.setVia(schedaAnagraficaDTO.via());
-    schedaAnagrafica.setUser(userRepository.findById(schedaAnagraficaDTO.user_id()).get());
-
-    return schedaAnagraficaRepository.save(schedaAnagrafica).getId();
+    return schedaAnagraficaService.save(schedaAnagrafica,schedaAnagraficaDTO).getId();
 }
+
+@DeleteMapping("/{id}")
+@PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+public boolean deleteById(@PathVariable long id){
+    try {
+        schedaAnagraficaRepository.deleteById(id);
+        return true;
+    }catch (Exception e){
+        return false;
+    }
+}
+
+@PutMapping("/{id}")
+@PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+    public SchedaAnagrafica updateById(@PathVariable long id, @RequestBody SchedaAnagraficaDTO schedaAnagraficaDTO){
+
+    return schedaAnagraficaService.updateById(id,schedaAnagraficaDTO);
+}
+
+    @GetMapping("/{codiceFiscale}")
+    @PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+    public SchedaAnagrafica getByCodiceFiscale(@PathVariable String codiceFiscale){
+        return schedaAnagraficaRepository.findByCodiceFiscale(codiceFiscale);
+    }
+    @GetMapping("/{partitaIva}")
+    @PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+    public SchedaAnagrafica getByPartitaIva(@PathVariable String partitaIva){
+        return schedaAnagraficaRepository.findByPartitaIva(partitaIva);
+    }
+
 }
