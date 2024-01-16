@@ -5,6 +5,7 @@ import com.example.thecommerce.product.Product;
 import com.example.thecommerce.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Table(name="User_comments")
 @Getter
 @Setter
+@NoArgsConstructor
 public class CommentUser extends Comment {
     @ManyToOne
     @JoinColumn(name = "user_id")
