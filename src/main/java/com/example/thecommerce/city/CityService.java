@@ -1,6 +1,8 @@
 package com.example.thecommerce.city;
 
 import com.example.thecommerce.category.Category;
+import com.example.thecommerce.nation.NationRepository;
+import com.example.thecommerce.payloads.entities.CityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +12,16 @@ import java.util.List;
 public class CityService {
     @Autowired
     CityRepository cityRepository;
+    @Autowired
+    NationRepository nationRepository;
+
+    public City save(CityDTO city){
+        City city1=new City();
+        city1.setNome(city.nome());
+        city1.setNation(nationRepository.findById(city.nation_id()).get());
 
 
-    public City save(City city){
-        return cityRepository.save(city);
+        return cityRepository.save(city1);
     }
     public List<City> getAll(){
         return cityRepository.findAll();
@@ -27,10 +35,13 @@ public class CityService {
         }
     }
 
-    public City updateById(long id , City city){
+    public City updateById(long id , CityDTO city){
         City city1= cityRepository.findById(id).get();
-        city1.setNome(city.getNome());
-        return cityRepository.save(city);
+        city1.setNome(city.nome());
+        city1.setNation(nationRepository.findById(city.nation_id()).get());
+
+
+        return cityRepository.save(city1);
     }
 
     public  List<City> getByNationId(long nationId){

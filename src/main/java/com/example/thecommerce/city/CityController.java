@@ -2,6 +2,7 @@ package com.example.thecommerce.city;
 
 import com.example.thecommerce.category.Category;
 import com.example.thecommerce.exception.BadRequestException;
+import com.example.thecommerce.payloads.entities.CityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
@@ -18,7 +19,7 @@ public class CityController {
 
     @PostMapping("")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public City save(@RequestBody @Validated City city, BindingResult validation){
+    public City save(@RequestBody @Validated CityDTO city, BindingResult validation){
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         }else{
@@ -48,7 +49,7 @@ public boolean deleteById(@PathVariable long id){
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-public City updateById(@PathVariable long id, @RequestBody City city){
+public City updateById(@PathVariable long id, @RequestBody CityDTO city){
         return cityService.updateById(id,city);
     }
 }

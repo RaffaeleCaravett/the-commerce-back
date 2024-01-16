@@ -3,6 +3,7 @@ package com.example.thecommerce.city;
 import com.example.thecommerce.nation.Nation;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -11,16 +12,15 @@ import java.util.List;
 @Table(name="city")
 @Getter
 @Setter
+@NoArgsConstructor
 public class City {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private String nome;
-    @ManyToMany
-    @JoinTable(name = "nation_city",
-            joinColumns = @JoinColumn(name = "city_id"),
-            inverseJoinColumns = @JoinColumn(name = "nation_id"))
-    private List<Nation> nationList;
+    @ManyToOne
+    @JoinColumn(name = "nation_id")
+    private Nation nation;
 
     public City(String nome) {
         this.nome = nome;

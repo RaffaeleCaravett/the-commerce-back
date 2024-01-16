@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NationRepository extends JpaRepository<Nation,Long> {
+    Nation findByCity_Id(long cityId);
 }
