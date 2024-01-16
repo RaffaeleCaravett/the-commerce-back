@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SocietàRepository extends JpaRepository<Società,Long> {
+    Società findBySchedaAnagrafica_id(long id);
 }
