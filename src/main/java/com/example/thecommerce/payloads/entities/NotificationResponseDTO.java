@@ -14,8 +14,7 @@ public record NotificationResponseDTO(
         long receiver_id,
         @NotNull(message = "Lo stato è un campo obbligatorio!")
         String statoNotifica,
-        long comment_id,
-        long friendship_id,
+        long product_id,
         LocalDate createdAt
 ) {
 }
