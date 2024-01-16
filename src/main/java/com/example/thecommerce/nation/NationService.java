@@ -30,6 +30,6 @@ public class NationService {
     }
 
     public Nation findNationsByCityId(int id) {
-        return nationRepository.findByCity_Id(id);
+        return nationRepository.findByCities_Id(id);
     }
 }

@@ -3,6 +3,7 @@ package com.example.thecommerce.user;
 
 import com.example.thecommerce.city.City;
 import com.example.thecommerce.comment.Comment;
+import com.example.thecommerce.comment.user.CommentUser;
 import com.example.thecommerce.enums.UserRoles;
 import com.example.thecommerce.like.Like;
 import com.example.thecommerce.nation.Nation;
@@ -39,7 +40,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "nation_id")
     private Nation nazione;
     @ManyToOne
-    @JoinColumn(name = "nation_id")
+    @JoinColumn(name = "city_id")
     private City citta;
 
     @Column(name = "nomeCompleto", length = 255)
@@ -57,7 +58,7 @@ public class User implements UserDetails {
     private List<Rating> ratings;
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
+    private List<CommentUser> comments;
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Like> likes;

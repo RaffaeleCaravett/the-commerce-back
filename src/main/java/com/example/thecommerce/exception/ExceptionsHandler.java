@@ -1,7 +1,8 @@
 package com.example.thecommerce.exception;
 
-import com.example.unbreackable.payloads.errors.ErrorsDTO;
-import com.example.unbreackable.payloads.errors.ErrorsWithListDTO;
+
+import com.example.thecommerce.payloads.errors.ErrorsDTO;
+import com.example.thecommerce.payloads.errors.ErrorsWithListDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

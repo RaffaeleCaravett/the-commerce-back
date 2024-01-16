@@ -32,10 +32,10 @@ public class CommentPredefinedService {
     }
 
     public List<CommentPredefined> getAllByUserId(long id){
-        return commentPredefinedRepository.findByUser_Id(id);
+        return commentPredefinedRepository.findByUsers_Id(id);
     }
     public List<CommentPredefined> getAllByProductId(long id){
-        return commentPredefinedRepository.findByProduct_Id(id);
+        return commentPredefinedRepository.findByProducts_Id(id);
     }
 
     public CommentPredefined updateById(long id, CommentPredefinedDTO commentPredefinedDTO){

@@ -14,7 +14,7 @@ public class Società {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="scheda_anagrafica_id")
     private SchedaAnagrafica schedaAnagrafica;
 

@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table
 @Getter
@@ -30,5 +32,5 @@ private double capitaleSociale;
     @JoinColumn(name = "user_id")
     private User user;
 @OneToMany(mappedBy = "schedaAnagrafica")
-    private Società società;
+    private List<Società> società;
 }

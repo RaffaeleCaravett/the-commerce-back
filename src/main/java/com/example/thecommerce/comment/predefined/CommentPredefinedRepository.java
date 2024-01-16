@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CommentPredefinedRepository extends JpaRepository<CommentPredefined,Long> {
-    List<CommentPredefined> findByUser_Id(long id);
-    List<CommentPredefined> findByProduct_Id(long id);
+    List<CommentPredefined> findByUsers_Id(long id);
+    List<CommentPredefined> findByProducts_Id(long id);
 }

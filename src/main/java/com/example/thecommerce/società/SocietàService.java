@@ -22,6 +22,7 @@ public class SocietàService{
     public Società save (SocietàDTO societàDTO){
         Società società=new Società();
 
+        
         società.setNome(societàDTO.nome());
         società.setSchedaAnagrafica(schedaAnagraficaRepository.findById(societàDTO.scheda_anagrafica_id()).get());
 
