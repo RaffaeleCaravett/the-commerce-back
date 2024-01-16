@@ -1,5 +1,6 @@
-package com.example.thecommerce.comment;
+package com.example.thecommerce.comment.user;
 
+import com.example.thecommerce.comment.Comment;
 import com.example.thecommerce.product.Product;
 import com.example.thecommerce.user.User;
 import jakarta.persistence.*;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @Table(name="User_comments")
 @Getter
 @Setter
-public class CommentUser extends Comment{
+public class CommentUser extends Comment {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

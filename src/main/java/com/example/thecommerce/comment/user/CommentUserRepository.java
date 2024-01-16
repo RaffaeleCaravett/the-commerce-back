@@ -1,5 +1,6 @@
-package com.example.thecommerce.comment;
+package com.example.thecommerce.comment.user;
 
+import com.example.thecommerce.comment.user.CommentUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

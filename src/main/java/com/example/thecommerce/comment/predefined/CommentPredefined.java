@@ -1,5 +1,6 @@
-package com.example.thecommerce.comment;
+package com.example.thecommerce.comment.predefined;
 
+import com.example.thecommerce.comment.Comment;
 import com.example.thecommerce.product.Product;
 import com.example.thecommerce.user.User;
 import jakarta.persistence.*;
@@ -15,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CommentPredefined extends Comment{
+public class CommentPredefined extends Comment {
   @ManyToMany
   @JoinTable(name = "predefined_user",
           joinColumns = @JoinColumn(name = "predefined_id"),

@@ -1,5 +1,6 @@
-package com.example.thecommerce.comment;
+package com.example.thecommerce.comment.predefined;
 
+import com.example.thecommerce.comment.predefined.CommentPredefined;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
