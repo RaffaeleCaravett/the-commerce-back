@@ -3,6 +3,7 @@ package com.example.thecommerce.category;
 import com.example.thecommerce.product.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.IdGeneratorType;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Table
 @Getter
 @Setter
+@NoArgsConstructor
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +25,9 @@ public class Category {
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> product;
     private String image;
-    public Category(String name) {
+    public Category(String name,String image) {
         this.name = name;
+        this.image=image;
     }
+
 }

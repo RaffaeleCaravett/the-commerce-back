@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("category")
+@RequestMapping("/category")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
@@ -23,7 +23,7 @@ public class CategoryController {
 
     @PostMapping("")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Category save(@RequestBody @Validated Category category){
+    public Category save(@RequestBody Category category){
         try{
             return categoryService.save(category);
         }catch (Error e){
@@ -31,7 +31,6 @@ public class CategoryController {
         }
     }
 @PutMapping("/{id}")
-@PreAuthorize("hasAuthority('ADMIN')")
 public Category updateById(@PathVariable long id,@RequestBody Category category){
         return categoryService.updateById(id,category);
 }
