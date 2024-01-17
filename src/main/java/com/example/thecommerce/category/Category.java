@@ -22,7 +22,7 @@ public class Category {
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> product;
-
+    private String image;
     public Category(String name) {
         this.name = name;
     }
