@@ -45,4 +45,9 @@ public Category updateById(@PathVariable long id,@RequestBody Category category)
 
         return categoryService.uploadAvatar(id,body);
     }
+
+    @GetMapping("/{id}")
+    public Category getById(@PathVariable long id){
+        return categoryService.getById(id);
+    }
 }

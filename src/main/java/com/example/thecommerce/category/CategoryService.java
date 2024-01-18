@@ -55,4 +55,8 @@ return categoryRepository.save(category);
             throw new RuntimeException("Impossibile caricare l'immagine", e);
         }
     }
+
+    public Category getById(long id){
+        return categoryRepository.findById(id).get();
+    }
 }
