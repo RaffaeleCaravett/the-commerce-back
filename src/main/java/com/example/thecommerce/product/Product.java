@@ -29,6 +29,6 @@ public class Product {
     private List<Category> category;
     @ManyToOne
     @JoinColumn(name = "società_id")
-    private Società società;
+    private Società societa;
     private String immagine;
 }

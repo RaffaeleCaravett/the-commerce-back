@@ -38,7 +38,7 @@ public class ProductService {
             categories.add(categoryRepository.findById(l).get());
         }        product1.setPezzi(product.pezzi());
         product1.setPrezzo(product.prezzo());
-        product1.setSocietà(societàRepository.findById(product.società_id()).get());
+        product1.setSocieta(societàRepository.findById(product.società_id()).get());
 uploadProductImage(multipartFile,product1);
 return product1;
     }
@@ -89,7 +89,7 @@ return product1;
     }
     public Page<Product> findBySocietàId(long societàId,int page, int size, String orderBy){
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
-        return productRepository.findBySocietà_Id(societàId,pageable);
+        return productRepository.findBySocieta_Id(societàId,pageable);
     }
     public Page<Product> getAll(int page, int size, String orderBy){
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));

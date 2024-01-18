@@ -20,10 +20,8 @@ public class NationController {
     private NationService nationService;
 
     @GetMapping("")
-    public Page<Nation> getNations(@RequestParam(defaultValue = "0") int page,
-                                   @RequestParam(defaultValue = "10") int size,
-                                   @RequestParam(defaultValue = "id") String orderBy) {
-        return  nationService.getNations(page, size, orderBy);
+    public List<Nation> getNations() {
+        return  nationService.getNations();
     }
 
     @PostMapping
@@ -41,7 +39,7 @@ public Nation save(@RequestBody @Validated Nation nation, BindingResult validati
         return  nationService.findById(id);
     }
 
-    @GetMapping("/continents/{id}")
+    @GetMapping("/cities/{id}")
     public Nation findNationsByCityId(@PathVariable int id) {
         return nationService.findNationsByCityId(id);
     }

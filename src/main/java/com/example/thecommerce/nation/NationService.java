@@ -12,9 +12,8 @@ public class NationService {
     @Autowired
     private NationRepository nationRepository;
 
-    public Page<Nation> getNations(int page, int size, String orderBy) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
-        return nationRepository.findAll(pageable);
+    public List<Nation> getNations() {
+        return nationRepository.findAll();
     }
 
     public Nation findById(long id) throws NotFoundException {

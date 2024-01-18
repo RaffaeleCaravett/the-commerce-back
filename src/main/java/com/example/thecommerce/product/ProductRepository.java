@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
     Page<Product> findByCategory_Id(long id, Pageable pageable);
-    Page<Product> findBySocietà_Id(long id,Pageable pageable);
+    Page<Product> findBySocieta_Id(long id,Pageable pageable);
 }
