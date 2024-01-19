@@ -8,6 +8,7 @@ import com.example.thecommerce.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class AcquistoService {
             totale+= p.getPrezzo();
         }
         acquisto.setTotale(totale);
+        acquisto.setCreated_at(LocalDate.now());
             return acquistoRepository.save(acquisto);
     }
 
