@@ -5,7 +5,9 @@ import com.example.thecommerce.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RicercaService {
@@ -23,6 +25,12 @@ public class RicercaService {
 
 
     public List<Ricerca> getAllByUserId(long userId){
-        return ricercaRepository.findByUser_Id(userId).stream().limit(5).toList();
+        List<Ricerca> resultList = ricercaRepository.findByUser_Id(userId)
+                .stream()
+                .limit(5)
+                .sorted(Comparator.comparing(Ricerca::getId).reversed())
+                .collect(Collectors.toList());
+
+        return resultList;
     }
 }
