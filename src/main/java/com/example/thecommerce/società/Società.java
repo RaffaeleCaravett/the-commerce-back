@@ -1,9 +1,12 @@
 package com.example.thecommerce.società;
 
+import com.example.thecommerce.product.Product;
 import com.example.thecommerce.schedaAnagrafica.SchedaAnagrafica;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table
@@ -17,5 +20,7 @@ public class Società {
     @ManyToOne
     @JoinColumn(name="scheda_anagrafica_id")
     private SchedaAnagrafica schedaAnagrafica;
+    @OneToMany(mappedBy = "societa", cascade = CascadeType.REMOVE)
+    private List<Product> products;
 
 }

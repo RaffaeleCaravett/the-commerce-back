@@ -27,8 +27,8 @@ public class RicercaService {
     public List<Ricerca> getAllByUserId(long userId){
         List<Ricerca> resultList = ricercaRepository.findByUser_Id(userId)
                 .stream()
-                .limit(5)
                 .sorted(Comparator.comparing(Ricerca::getId).reversed())
+                .limit(5)
                 .collect(Collectors.toList());
 
         return resultList;

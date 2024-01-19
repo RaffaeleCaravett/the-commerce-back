@@ -22,13 +22,13 @@ SchedaAnagraficaRepository schedaAnagraficaRepository;
     UserRepository userRepository;
 
 @GetMapping("/{id}")
-@PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+@PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public SchedaAnagrafica getById(@PathVariable long id){
     return schedaAnagraficaService.findById(id);
 }
 
 @PostMapping("")
-@PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+@PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
 public long save(@RequestBody @Validated SchedaAnagraficaDTO schedaAnagraficaDTO, BindingResult validation){
     SchedaAnagrafica schedaAnagrafica=new SchedaAnagrafica();
     if(validation.hasErrors()){
@@ -53,7 +53,7 @@ public long save(@RequestBody @Validated SchedaAnagraficaDTO schedaAnagraficaDTO
 }
 
 @DeleteMapping("/{id}")
-@PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+@PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
 public boolean deleteById(@PathVariable long id){
     try {
         schedaAnagraficaRepository.deleteById(id);
@@ -64,19 +64,19 @@ public boolean deleteById(@PathVariable long id){
 }
 
 @PutMapping("/{id}")
-@PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+@PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public SchedaAnagrafica updateById(@PathVariable long id, @RequestBody SchedaAnagraficaDTO schedaAnagraficaDTO){
 
     return schedaAnagraficaService.updateById(id,schedaAnagraficaDTO);
 }
 
     @GetMapping("/{codiceFiscale}")
-    @PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public SchedaAnagrafica getByCodiceFiscale(@PathVariable String codiceFiscale){
         return schedaAnagraficaRepository.findByCodiceFiscale(codiceFiscale);
     }
     @GetMapping("/{partitaIva}")
-    @PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public SchedaAnagrafica getByPartitaIva(@PathVariable String partitaIva){
         return schedaAnagraficaRepository.findByPartitaIva(partitaIva);
     }

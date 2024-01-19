@@ -31,6 +31,6 @@ private double capitaleSociale;
 @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-@OneToMany(mappedBy = "schedaAnagrafica")
+@OneToMany(mappedBy = "schedaAnagrafica", cascade = CascadeType.REMOVE)
     private List<Società> società;
 }
