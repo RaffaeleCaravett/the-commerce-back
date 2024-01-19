@@ -69,6 +69,7 @@ public class AuthService {
         newUser.setCitta(cityRepository.findById(body.citta()).get());
         newUser.setPassword(bcrypt.encode(body.password()));
         newUser.setRole(UserRoles.UTENTE);
+        newUser.setCrediti(0);
         userRepository.save(newUser);
 
 

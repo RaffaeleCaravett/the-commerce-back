@@ -59,6 +59,9 @@ private CityRepository cityRepository;
         found.setNazione(nationRepository.findById(body.nazione()).get());
         found.setCitta(cityRepository.findById(body.citta()).get());
         //found.setPassword(bcrypt.encode(body.getPassword()));
+        long credito = found.getCrediti();
+        credito+= body.crediti();
+        found.setCrediti(credito);
   found.setRole(UserRoles.valueOf(body.role()));
         return utenteRepository.save(found);
     }

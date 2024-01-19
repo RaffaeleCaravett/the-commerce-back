@@ -17,6 +17,7 @@ public record UserRegistrationDTO(
         Long citta,
         @NotNull(message = "La nazione è un campo obbligatorio!")
         Long nazione,
-        String role
+        String role,
+        long crediti
 ) {
 }

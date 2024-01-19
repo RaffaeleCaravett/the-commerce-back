@@ -52,6 +52,8 @@ public class User implements UserDetails {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRoles role;
+    @Column(name = "crediti")
+    private long crediti;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -65,6 +67,7 @@ public class User implements UserDetails {
     @JsonIgnore
     @OneToMany(mappedBy = "receiver")
     private List<Notification> notifications;
+
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
