@@ -67,7 +67,7 @@ public class AuthService {
         newUser.setEmail(body.email());
         newUser.setNazione(nationRepository.findById(body.nazione()).get());
         newUser.setCitta(cityRepository.findById(body.citta()).get());
-        //found.setPassword(bcrypt.encode(body.getPassword()));
+        newUser.setPassword(bcrypt.encode(body.password()));
         newUser.setRole(UserRoles.UTENTE);
         userRepository.save(newUser);
 
