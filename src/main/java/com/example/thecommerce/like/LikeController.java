@@ -21,7 +21,7 @@ public class LikeController {
     private LikeService likeService;
 
     @GetMapping("")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','UTENTE')")
     public List<LikeResponseDTO> getLike(@RequestParam(defaultValue = "0") int page,
                                          @RequestParam(defaultValue = "10") int size,
                                          @RequestParam(defaultValue = "id") String orderBy){
@@ -30,13 +30,13 @@ public class LikeController {
 
 
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','UTENTE')")
     public Like findById(@PathVariable int id)  {
         return likeService.findById(id);
     }
 
     @PutMapping("/{id}/{userId}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','UTENTE')")
     public Like findByIdAndUpdate(@PathVariable int id,@PathVariable long userId, @RequestBody LikeDTO body) throws NotFoundException {
         if(likeService.findById(id).getUser().getId()==userId) {
             return likeService.findByIdAndUpdate(id, body);
@@ -47,7 +47,7 @@ public class LikeController {
     }
 
     @DeleteMapping("/{id}/{userId}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','UTENTE')")
     @ResponseStatus(HttpStatus.NO_CONTENT) // <-- 204 NO CONTENT
     public void findByIdAndDelete(@PathVariable long id,@PathVariable long userId) throws NotFoundException {
         if(likeService.findById(id).getUser().getId()==userId){
@@ -58,7 +58,7 @@ public class LikeController {
 
     }
     @PostMapping("")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','UTENTE')")
     public String saveLike(@RequestBody @Validated LikeDTO body, BindingResult validation){
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
@@ -74,18 +74,18 @@ public class LikeController {
         }
     }
 
-    @GetMapping(value = "/product/{productId}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @GetMapping("/product/{productId}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','UTENTE')")
     public List<Like> findByProductId(@PathVariable long productId)  {
         return likeService.findByProductId(productId);
     }
-    @GetMapping(value = "/user/{userId}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @GetMapping("/user/{userId}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','UTENTE')")
     public List<Like> findByUserId(@PathVariable long userId)  {
         return likeService.findByUserId(userId);
     }
     @GetMapping("/productUser")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','UTENTE')")
     public Like findByProductIdAndUserId(
             @RequestParam Long productId,
             @RequestParam Long userId) {
