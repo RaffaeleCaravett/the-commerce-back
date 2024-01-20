@@ -70,15 +70,19 @@ public boolean deleteById(@PathVariable long id){
     return schedaAnagraficaService.updateById(id,schedaAnagraficaDTO);
 }
 
-    @GetMapping("/{codiceFiscale}")
+    @GetMapping("/codiceFiscale/{codiceFiscale}")
     @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public SchedaAnagrafica getByCodiceFiscale(@PathVariable String codiceFiscale){
         return schedaAnagraficaRepository.findByCodiceFiscale(codiceFiscale);
     }
-    @GetMapping("/{partitaIva}")
+    @GetMapping("/partitaIva/{partitaIva}")
     @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public SchedaAnagrafica getByPartitaIva(@PathVariable String partitaIva){
         return schedaAnagraficaRepository.findByPartitaIva(partitaIva);
     }
-
+    @GetMapping("/user/{userId}")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
+    public SchedaAnagrafica getByUserId(@PathVariable long userId){
+        return schedaAnagraficaRepository.findByUser_Id(userId);
+    }
 }

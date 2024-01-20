@@ -18,6 +18,9 @@ public class SchedaAnagraficaService {
 
 
     public SchedaAnagrafica save (SchedaAnagrafica schedaAnagrafica, SchedaAnagraficaDTO schedaAnagraficaDTO){
+        if(schedaAnagraficaRepository.findByEmail(schedaAnagraficaDTO.email())!=null){
+            throw new BadRequestException("A questa email è già associato una scheda anagrafica");
+        }
         schedaAnagrafica.setNome(schedaAnagraficaDTO.nome());
         schedaAnagrafica.setCognome(schedaAnagraficaDTO.cognome());
         schedaAnagrafica.setEmail(schedaAnagraficaDTO.email());
@@ -51,6 +54,8 @@ public class SchedaAnagraficaService {
             if(schedaAnagrafica1!=null && !schedaAnagrafica1.equals(schedaAnagrafica)){
                 throw new BadRequestException("La partita iva appartiene ad un'altra scheda anagrafica");
             }
+        }else if(schedaAnagraficaRepository.findByEmail(schedaAnagraficaDTO.email())!=null&& schedaAnagraficaRepository.findByEmail(schedaAnagraficaDTO.email()).getId()!=id){
+            throw new BadRequestException("L'email che hai inserito corrisponde ad un'altra scheda anagrafica.");
         }
         schedaAnagrafica.setNome(schedaAnagraficaDTO.nome());
         schedaAnagrafica.setCognome(schedaAnagraficaDTO.cognome());
