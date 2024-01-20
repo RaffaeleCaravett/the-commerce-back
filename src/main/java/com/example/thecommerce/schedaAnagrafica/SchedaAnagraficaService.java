@@ -65,6 +65,8 @@ public class SchedaAnagraficaService {
         if(schedaAnagraficaDTO.capitaleSociale()!=0){
             schedaAnagrafica.setCapitaleSociale(schedaAnagraficaDTO.capitaleSociale());
         }
+        schedaAnagrafica.setCodiceFiscale(schedaAnagraficaDTO.codiceFiscale());
+        schedaAnagrafica.setPartitaIva(schedaAnagraficaDTO.partitaIva());
         schedaAnagrafica.setIndirizzo(schedaAnagraficaDTO.indirizzo());
         schedaAnagrafica.setNumeroCivico(schedaAnagraficaDTO.numeroCivico());
         schedaAnagrafica.setVia(schedaAnagraficaDTO.via());
