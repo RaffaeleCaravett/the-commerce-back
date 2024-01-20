@@ -67,11 +67,13 @@ public boolean deleteById(@PathVariable long id){
 @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public SchedaAnagrafica updateById(@PathVariable long id, @RequestBody SchedaAnagraficaDTO schedaAnagraficaDTO){
     if(schedaAnagraficaDTO.codiceFiscale() != null){
-        if(schedaAnagraficaRepository.findByCodiceFiscale(schedaAnagraficaDTO.codiceFiscale())!=null){
+        if(schedaAnagraficaRepository.findByCodiceFiscale(schedaAnagraficaDTO.codiceFiscale())!=null&&
+                schedaAnagraficaRepository.findByCodiceFiscale(schedaAnagraficaDTO.codiceFiscale()).getId()!=id){
             throw new BadRequestException("Codice fiscale già presente nel database");
         }
     }else if(schedaAnagraficaDTO.partitaIva()!=null){
-        if(schedaAnagraficaRepository.findByPartitaIva(schedaAnagraficaDTO.partitaIva())!=null){
+        if(schedaAnagraficaRepository.findByPartitaIva(schedaAnagraficaDTO.partitaIva())!=null&&
+                schedaAnagraficaRepository.findByPartitaIva(schedaAnagraficaDTO.partitaIva()).getId()!=id){
             throw new BadRequestException("Partita Iva già presente nel database");
         }
     }else if(schedaAnagraficaDTO.partitaIva()==null&&schedaAnagraficaDTO.codiceFiscale()==null){

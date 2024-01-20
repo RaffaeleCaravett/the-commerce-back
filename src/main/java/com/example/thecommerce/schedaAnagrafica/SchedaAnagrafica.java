@@ -3,6 +3,7 @@ package com.example.thecommerce.schedaAnagrafica;
 import com.example.thecommerce.enums.UserRoles;
 import com.example.thecommerce.società.Società;
 import com.example.thecommerce.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,7 @@ private double capitaleSociale;
 @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+@JsonIgnore
 @OneToMany(mappedBy = "schedaAnagrafica", cascade = CascadeType.REMOVE)
     private List<Società> società;
 }

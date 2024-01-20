@@ -2,6 +2,7 @@ package com.example.thecommerce.società;
 
 import com.example.thecommerce.product.Product;
 import com.example.thecommerce.schedaAnagrafica.SchedaAnagrafica;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class Società {
     @ManyToOne
     @JoinColumn(name="scheda_anagrafica_id")
     private SchedaAnagrafica schedaAnagrafica;
+    @JsonIgnore
     @OneToMany(mappedBy = "societa", cascade = CascadeType.REMOVE)
     private List<Product> products;
 

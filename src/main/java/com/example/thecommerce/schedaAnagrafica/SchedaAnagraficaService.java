@@ -33,7 +33,7 @@ public class SchedaAnagraficaService {
         schedaAnagrafica.setNumeroCivico(schedaAnagraficaDTO.numeroCivico());
         schedaAnagrafica.setVia(schedaAnagraficaDTO.via());
         schedaAnagrafica.setUser(userRepository.findById(schedaAnagraficaDTO.user_id()).get());
-
+schedaAnagrafica.getUser().setRole(UserRoles.valueOf(String.valueOf(schedaAnagrafica.getRole())));
         return schedaAnagraficaRepository.save(schedaAnagrafica);
     }
 
@@ -71,6 +71,8 @@ public class SchedaAnagraficaService {
         schedaAnagrafica.setNumeroCivico(schedaAnagraficaDTO.numeroCivico());
         schedaAnagrafica.setVia(schedaAnagraficaDTO.via());
         schedaAnagrafica.setUser(userRepository.findById(schedaAnagraficaDTO.user_id()).get());
+        schedaAnagrafica.getUser().setRole(UserRoles.valueOf(String.valueOf(schedaAnagrafica.getRole())));
+
 
         return schedaAnagraficaRepository.save(schedaAnagrafica);
     }

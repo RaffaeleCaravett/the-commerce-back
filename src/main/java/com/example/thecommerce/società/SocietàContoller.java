@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/società")
+@RequestMapping("/societa")
 public class SocietàContoller {
     @Autowired
     SocietàService societàService;
@@ -29,8 +29,8 @@ public class SocietàContoller {
         return societàService.getSocietà(page, size, orderBy);
     }
     @GetMapping("/{schedaAnagraficaId}")
-    public Società getFromSchedaAnagraficaId(@PathVariable long id) {
-        return societàService.getSocietàBySchedaAnagraficaId(id);
+    public Società getFromSchedaAnagraficaId(@PathVariable long schedaAnagraficaId) {
+        return societàService.getSocietàBySchedaAnagraficaId(schedaAnagraficaId);
     }
 
     @DeleteMapping("/{id}")

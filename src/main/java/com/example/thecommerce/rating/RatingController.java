@@ -22,14 +22,14 @@ public class RatingController {
     private RatingService ratingService;
 
     @GetMapping("")
-    @PreAuthorize("hasAuthority('UTENTE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public Page<Rating> getRatings(@RequestParam(defaultValue = "0") int page,
                                               @RequestParam(defaultValue = "10") int size,
                                               @RequestParam(defaultValue = "id") String orderBy){
         return ratingService.getRatings(page, size, orderBy);
     }
     @GetMapping("/user/paginatedByRating/{userId}")
-    @PreAuthorize("hasAuthority('UTENTE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public Page<Rating> findByUserIdPaginated(@PathVariable long userId, @RequestParam(defaultValue = "0") int page,
                                      @RequestParam(defaultValue = "5") int size,
                                      @RequestParam(defaultValue = "rating") String orderBy,
@@ -38,25 +38,25 @@ public class RatingController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('UTENTE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public Rating findById(@PathVariable int id)  {
         return ratingService.findById(id);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','UTENTE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public Rating findByIdAndUpdate(@PathVariable int id, @RequestBody RatingDTO body) throws NotFoundException {
         return ratingService.findByIdAndUpdate(id, body);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('UTENTE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     @ResponseStatus(HttpStatus.NO_CONTENT) // <-- 204 NO CONTENT
     public void findByIdAndDelete(@PathVariable long id) throws NotFoundException {
         ratingService.findByIdAndDelete(id);
     }
     @PostMapping("")
-    @PreAuthorize("hasAuthority('UTENTE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     @ResponseStatus(HttpStatus.CREATED) // <-- 201
     public Rating saveRating(@RequestBody @Validated RatingDTO body, BindingResult validation){
         if(validation.hasErrors()){
@@ -79,12 +79,12 @@ public class RatingController {
     }
 
     @GetMapping("/product/{id}")
-    @PreAuthorize("hasAuthority('UTENTE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public Page<Rating> findByArgumentName(@PathVariable long id)  {
         return ratingService.findByProductId(id,1,5,"id");
     }
     @GetMapping("/user/{userId}")
-    @PreAuthorize("hasAuthority('UTENTE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public List<Rating> findByUserId(@PathVariable long userId)  {
         return ratingService.findByUserId(userId);
     }
