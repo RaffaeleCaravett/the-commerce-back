@@ -17,7 +17,7 @@ public record ProductDTO(
         @NotNull(message="Il category_id è obbligatorio")
         List<Long> category_id,
         @NotNull(message="La società_id è obbligatoria")
-        long società_id
+        long societa_id
 
 ){
 }

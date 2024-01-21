@@ -38,7 +38,7 @@ public class ProductService {
             categories.add(categoryRepository.findById(l).get());
         }        product1.setPezzi(product.pezzi());
         product1.setPrezzo(product.prezzo());
-        product1.setSocieta(societàRepository.findById(product.società_id()).get());
+        product1.setSocieta(societàRepository.findById(product.societa_id()).get());
 uploadProductImage(multipartFile,product1);
 return product1;
     }
