@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "products")
+@Table(name = "/products")
 @Getter
 @Setter
 public class Product {
@@ -22,11 +22,9 @@ public class Product {
     private TipoProdotto tipoProdotto;
     private double prezzo;
     private int pezzi;
-    @ManyToMany
-    @JoinTable(name="product_category",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> category;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Category category;
     @ManyToOne
     @JoinColumn(name = "società_id")
     private Società societa;

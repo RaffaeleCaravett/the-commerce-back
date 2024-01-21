@@ -15,7 +15,7 @@ public record ProductDTO(
         @NotNull(message="I pezzi è un campo obbligatorio")
         int pezzi,
         @NotNull(message="Il category_id è obbligatorio")
-        List<Long> category_id,
+        long category_id,
         @NotNull(message="La società_id è obbligatoria")
         long societa_id
 

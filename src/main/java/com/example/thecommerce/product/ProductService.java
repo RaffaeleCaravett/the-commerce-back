@@ -33,10 +33,8 @@ public class ProductService {
 
         product1.setNome(product.nome());
         product1.setTipoProdotto(TipoProdotto.valueOf(product.tipoProdotto()));
-        List<Category> categories =new ArrayList<>();
-        for(Long l : product.category_id()){
-            categories.add(categoryRepository.findById(l).get());
-        }        product1.setPezzi(product.pezzi());
+        product1.setCategory(categoryRepository.findById(product.category_id()).get());
+        product1.setPezzi(product.pezzi());
         product1.setPrezzo(product.prezzo());
         product1.setSocieta(societàRepository.findById(product.societa_id()).get());
 uploadProductImage(multipartFile,product1);
@@ -71,11 +69,8 @@ return product1;
         Product product= productRepository.findById(id).get();
         product.setNome(productDTO.nome());
 
-        List<Category> categories =new ArrayList<>();
-        for(Long l : productDTO.category_id()){
-            categories.add(categoryRepository.findById(l).get());
-        }
-        product.setCategory(categories);
+
+        product.setCategory(categoryRepository.findById(productDTO.category_id()).get());
         product.setPezzi(productDTO.pezzi());
         product.setPrezzo(productDTO.prezzo());
         product.setTipoProdotto(TipoProdotto.valueOf(productDTO.tipoProdotto()));
