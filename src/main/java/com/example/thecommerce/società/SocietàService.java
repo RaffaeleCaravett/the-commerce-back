@@ -46,7 +46,7 @@ public boolean deleteById(long id){
 }
 
 public Società updateById(long id, SocietàDTO societàDTO){
-        Società società = new Società();
+        Società società = societàRepository.findById(id).get();
 
         società.setNome(societàDTO.nome());
         società.setSchedaAnagrafica(schedaAnagraficaRepository.findById(societàDTO.scheda_anagrafica_id()).get());
