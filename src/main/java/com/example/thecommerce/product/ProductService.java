@@ -51,6 +51,9 @@ public class ProductService {
         product1.setPrezzo(product.prezzo());
         product1.setSocieta(societàRepository.findById(product.societa_id()).get());
         product1.setSocietàName(product1.getSocieta().getNome());
+        System.out.println(product1.getNome());
+        System.out.println(product1.getSocieta());
+        System.out.println(product1.getSocieta().getNome());
 uploadProductImage(multipartFile,product1);
 return product1;
     }

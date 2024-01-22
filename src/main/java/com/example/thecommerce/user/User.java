@@ -54,7 +54,6 @@ public class User implements UserDetails {
     private UserRoles role;
     @Column(name = "crediti")
     private long crediti;
-
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Rating> ratings;
