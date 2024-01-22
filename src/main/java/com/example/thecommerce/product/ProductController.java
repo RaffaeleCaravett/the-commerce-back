@@ -53,7 +53,7 @@ public Product save(@RequestPart("productDTO") @Validated ProductDTO productDTO,
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('VENDITORE')")
-public Product updateById(@PathVariable int id, @RequestBody ProductDTO body,@RequestParam("immagine_profilo") MultipartFile multipartFile) throws IOException {
+public Product updateById(@PathVariable int id, @RequestPart("productDTO") @Validated ProductDTO body, @RequestPart("immagine_profilo") MultipartFile multipartFile) throws IOException {
         return productService.updateById(id,body,multipartFile);
     }
     @DeleteMapping("/{id}")

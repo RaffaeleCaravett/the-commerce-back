@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "/products")
+@Table(name = "products")
 @Getter
 @Setter
 public class Product {

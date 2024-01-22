@@ -7,6 +7,7 @@ import com.example.thecommerce.category.CategoryRepository;
 import com.example.thecommerce.enums.TipoProdotto;
 import com.example.thecommerce.payloads.entities.ProductDTO;
 import com.example.thecommerce.società.SocietàRepository;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,15 @@ public class ProductService {
     @Autowired
     private Cloudinary cloudinary;
     public Product save(ProductDTO product,MultipartFile multipartFile) throws IOException {
+        List<Product> products = productRepository.findBySocieta_Id(product.societa_id());
+        if(!products.isEmpty()){
+            for(Product p : products){
+                if(p.getNome().equals(product.nome())){
+                    throw new BadRequestException("Esiste già un tuo prodotto con questo nome");
+                }
+            };
+        }
+
         Product product1= new Product();
 
         product1.setNome(product.nome());
@@ -67,9 +77,18 @@ return product1;
 
     public Product updateById(long id, ProductDTO productDTO,MultipartFile multipartFile) throws IOException {
         Product product= productRepository.findById(id).get();
+        if(!product.getNome().equals(productDTO.nome())){
+            List<Product> products = productRepository.findBySocieta_Id(productDTO.societa_id());
+            if(!products.isEmpty()){
+                for(Product p : products){
+                    if(p.getNome().equals(productDTO.nome())){
+                        throw new BadRequestException("Esiste già un tuo prodotto con questo nome");
+                    }
+                };
+            }
+        }
+
         product.setNome(productDTO.nome());
-
-
         product.setCategory(categoryRepository.findById(productDTO.category_id()).get());
         product.setPezzi(productDTO.pezzi());
         product.setPrezzo(productDTO.prezzo());
