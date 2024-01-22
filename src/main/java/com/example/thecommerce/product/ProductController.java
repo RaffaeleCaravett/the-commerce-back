@@ -29,7 +29,7 @@ public class ProductController {
 
     @PostMapping("")
     @PreAuthorize("hasAnyAuthority('VENDITORE')")
-public Product save(@RequestBody @Validated ProductDTO productDTO, BindingResult validation, @RequestParam("immagine_profilo") MultipartFile multipartFile) throws IOException {
+public Product save(@RequestPart("productDTO") @Validated ProductDTO productDTO, @RequestPart("immagine_profilo") MultipartFile multipartFile, BindingResult validation) throws IOException {
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         }else{
