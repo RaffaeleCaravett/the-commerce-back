@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CarrelloRepository extends JpaRepository<Carrello,Long> {
-    Carrello getByUser_Id(long user_id);
+    Carrello findByUser_Id(long user_id);
 }
