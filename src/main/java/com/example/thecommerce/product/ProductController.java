@@ -33,7 +33,11 @@ public Product save(@RequestPart("productDTO") @Validated ProductDTO productDTO,
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         }else{
+           try{
             return productService.save(productDTO,multipartFile);
+           }catch (Exception e){
+            throw new BadRequestException(e.getMessage());
+        }
         }
     }
     @GetMapping("/category/{id}")
@@ -53,8 +57,12 @@ public Product save(@RequestPart("productDTO") @Validated ProductDTO productDTO,
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('VENDITORE')")
-public Product updateById(@PathVariable int id, @RequestPart("productDTO") @Validated ProductDTO body, @RequestPart("immagine_profilo") MultipartFile multipartFile) throws IOException {
-        return productService.updateById(id,body,multipartFile);
+public Product updateById(@PathVariable int id, @RequestPart("productDTO") @Validated ProductDTO body, @RequestPart("immagine_profilo") MultipartFile multipartFile)  {
+        try{
+            return productService.updateById(id,body,multipartFile);
+        }catch (Exception e){
+            throw new BadRequestException(e.getMessage());
+        }
     }
     @DeleteMapping("/{id}")
     public boolean deleteById(@PathVariable long id){
