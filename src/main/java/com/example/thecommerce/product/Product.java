@@ -3,6 +3,7 @@ package com.example.thecommerce.product;
 import com.example.thecommerce.category.Category;
 import com.example.thecommerce.enums.TipoProdotto;
 import com.example.thecommerce.società.Società;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,8 +26,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Category category;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "società_id")
     private Società societa;
+    private String societàName;
     private String immagine;
 }

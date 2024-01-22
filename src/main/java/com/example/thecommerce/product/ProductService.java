@@ -30,6 +30,10 @@ public class ProductService {
     @Autowired
     private Cloudinary cloudinary;
     public Product save(ProductDTO product,MultipartFile multipartFile) throws IOException {
+        if(productRepository.findBySocieta_Id(product.societa_id()).size()==10){
+            throw new BadRequestException("Limite prodotti in vendita raggiunto. Elimina qualche prodotto per continuare a venderne di nuovi");
+        }
+
         List<Product> products = productRepository.findBySocieta_Id(product.societa_id());
         if(!products.isEmpty()){
             for(Product p : products){
@@ -38,7 +42,6 @@ public class ProductService {
                 }
             };
         }
-
         Product product1= new Product();
 
         product1.setNome(product.nome());
@@ -47,6 +50,7 @@ public class ProductService {
         product1.setPezzi(product.pezzi());
         product1.setPrezzo(product.prezzo());
         product1.setSocieta(societàRepository.findById(product.societa_id()).get());
+        product1.setSocietàName(product1.getSocieta().getNome());
 uploadProductImage(multipartFile,product1);
 return product1;
     }
@@ -93,7 +97,9 @@ return product1;
         product.setPezzi(productDTO.pezzi());
         product.setPrezzo(productDTO.prezzo());
         product.setTipoProdotto(TipoProdotto.valueOf(productDTO.tipoProdotto()));
-        uploadProductImage(multipartFile,product);
+        if(multipartFile != null && !multipartFile.isEmpty()){
+            uploadProductImage(multipartFile,product);
+        }
         return productRepository.save(product);
     }
 
@@ -101,9 +107,8 @@ return product1;
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
         return productRepository.findByCategory_Id(categoryId,pageable);
     }
-    public Page<Product> findBySocietàId(long societàId,int page, int size, String orderBy){
-        Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
-        return productRepository.findBySocieta_Id(societàId,pageable);
+    public List<Product> findBySocietàId(long societàId){
+        return productRepository.findBySocieta_Id(societàId);
     }
     public Page<Product> getAll(int page, int size, String orderBy){
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -20,7 +21,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("")
-    @PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public Page<Product> getAll(@RequestParam(defaultValue = "0") int page,
                                 @RequestParam(defaultValue = "10") int size,
                                 @RequestParam(defaultValue = "id") String orderBy){
@@ -41,23 +42,21 @@ public Product save(@RequestPart("productDTO") @Validated ProductDTO productDTO,
         }
     }
     @GetMapping("/category/{id}")
-    @PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public Page<Product> getAllByCategoryId(@PathVariable long id,@RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "10") int size,
     @RequestParam(defaultValue = "id") String orderBy){
         return productService.findByCategoryId(id,page,size,orderBy);
     }
     @GetMapping("/societa/{id}")
-    @PreAuthorize("hasAnyAuthority('UTENTE,VENDITORE')")
-    public Page<Product> getAllBySocietàId(@PathVariable long id,@RequestParam(defaultValue = "0") int page,
-                                @RequestParam(defaultValue = "10") int size,
-                                @RequestParam(defaultValue = "id") String orderBy){
-        return productService.findBySocietàId(id,page,size,orderBy);
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
+    public List<Product> getAllBySocietàId(@PathVariable long id){
+        return productService.findBySocietàId(id);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('VENDITORE')")
-public Product updateById(@PathVariable int id, @RequestPart("productDTO") @Validated ProductDTO body, @RequestPart("immagine_profilo") MultipartFile multipartFile)  {
+public Product updateById(@PathVariable int id, @RequestPart("productDTO") @Validated ProductDTO body, @RequestPart(name="immagine_profilo", required = false) MultipartFile multipartFile)  {
         try{
             return productService.updateById(id,body,multipartFile);
         }catch (Exception e){

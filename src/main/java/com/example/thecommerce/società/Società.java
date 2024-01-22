@@ -21,7 +21,6 @@ public class Società {
     @ManyToOne
     @JoinColumn(name="scheda_anagrafica_id")
     private SchedaAnagrafica schedaAnagrafica;
-    @JsonIgnore
     @OneToMany(mappedBy = "societa", cascade = CascadeType.REMOVE)
     private List<Product> products;
 

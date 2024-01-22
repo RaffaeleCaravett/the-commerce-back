@@ -1,6 +1,7 @@
 package com.example.thecommerce.category;
 
 import com.example.thecommerce.product.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name="product_category",
             joinColumns = @JoinColumn(name = "category_id"),
