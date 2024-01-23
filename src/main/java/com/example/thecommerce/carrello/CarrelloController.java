@@ -23,21 +23,21 @@ public class CarrelloController {
        return carrelloService.save(carrelloDTO);
     }
 
-    @GetMapping("/user/${id}")
+    @GetMapping("/user/{id}")
     public Carrello getByUserId(@PathVariable long id){
         return carrelloService.findByUserId(id);
     }
 
-    @DeleteMapping("/${id{")
+    @DeleteMapping("/{id}")
     public boolean deleteById(@PathVariable long id){
         return carrelloService.deleteById(id);
     }
 
-    @PutMapping("/${id}")
+    @PutMapping("/{id}")
     public Carrello findByIdAndUpdate(@PathVariable long id, @RequestBody CarrelloDTO carrelloDTO){
         return carrelloService.updateById(id,carrelloDTO);
     }
-    @GetMapping("/svuota/${id}")
+    @GetMapping("/svuota/{id}")
     public Carrello svuota(@PathVariable long id){
         return carrelloService.svuotaCarrello(id);
     }
