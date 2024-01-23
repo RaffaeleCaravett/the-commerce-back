@@ -21,7 +21,6 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("")
-    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public Page<Product> getAll(@RequestParam(defaultValue = "0") int page,
                                 @RequestParam(defaultValue = "10") int size,
                                 @RequestParam(defaultValue = "id") String orderBy){
@@ -29,7 +28,7 @@ public class ProductController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasAnyAuthority('VENDITORE')")
+    @PreAuthorize("hasAuthority('VENDITORE')")
 public Product save(@RequestPart("productDTO") @Validated ProductDTO productDTO, @RequestPart("immagine_profilo") MultipartFile multipartFile, BindingResult validation) throws IOException {
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
@@ -42,20 +41,18 @@ public Product save(@RequestPart("productDTO") @Validated ProductDTO productDTO,
         }
     }
     @GetMapping("/category/{id}")
-    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public Page<Product> getAllByCategoryId(@PathVariable long id,@RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "10") int size,
     @RequestParam(defaultValue = "id") String orderBy){
         return productService.findByCategoryId(id,page,size,orderBy);
     }
     @GetMapping("/societa/{id}")
-    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public List<Product> getAllBySocietàId(@PathVariable long id){
         return productService.findBySocietàId(id);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('VENDITORE')")
+    @PreAuthorize("hasAuthority('VENDITORE')")
 public Product updateById(@PathVariable int id, @RequestPart("productDTO") @Validated ProductDTO body, @RequestPart(name="immagine_profilo", required = false) MultipartFile multipartFile)  {
         try{
             return productService.updateById(id,body,multipartFile);
@@ -64,6 +61,7 @@ public Product updateById(@PathVariable int id, @RequestPart("productDTO") @Vali
         }
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('VENDITORE')")
     public boolean deleteById(@PathVariable long id){
         try {
             productService.deleteById(id);
