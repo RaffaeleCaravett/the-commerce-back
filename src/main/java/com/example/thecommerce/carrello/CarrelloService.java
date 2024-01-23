@@ -78,5 +78,12 @@ public Carrello svuotaCarrello(long id){
         carrello.setProducts(new ArrayList<>());
         return carrelloRepository.save(carrello);
 }
+public Carrello removeItemById(long carrelloId,long prodottoId){
+        Carrello carrello = carrelloRepository.findById(carrelloId).get();
+        Product product= productRepository.findById(prodottoId).get();
 
+        carrello.getProducts().remove(product);
+
+        return carrelloRepository.save(carrello);
+}
 }

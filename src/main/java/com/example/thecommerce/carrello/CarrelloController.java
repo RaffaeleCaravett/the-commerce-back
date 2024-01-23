@@ -37,6 +37,10 @@ public class CarrelloController {
     public Carrello findByIdAndUpdate(@PathVariable long id, @RequestBody CarrelloDTO carrelloDTO){
         return carrelloService.updateById(id,carrelloDTO);
     }
+    @GetMapping("/prodotto/{carrelloId}/{id}")
+    public Carrello removeItemById(@PathVariable long id, @PathVariable long carrelloId){
+        return carrelloService.removeItemById(carrelloId,id);
+    }
     @GetMapping("/svuota/{id}")
     public Carrello svuota(@PathVariable long id){
         return carrelloService.svuotaCarrello(id);
