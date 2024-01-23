@@ -33,10 +33,16 @@ public class AcquistoService {
         double totale = 0;
         for(Product p : acquisto.productList){
             totale+= p.getPrezzo();
+            p.setPezzi(p.getPezzi()-1);
+            productRepository.save(p);
         }
         acquisto.setTotale(totale);
         acquisto.setCreated_at(LocalDate.now());
-            return acquistoRepository.save(acquisto);
+             acquistoRepository.save(acquisto);
+
+
+
+             return acquisto;
     }
 
     public boolean deleteById(long id){
@@ -48,7 +54,7 @@ public class AcquistoService {
         }
     }
     public List<Acquisto> getAllByUserId(long id){
-        return acquistoRepository.findByUser_Id(id);
+        return acquistoRepository.findAllByUser_Id(id);
     }
 
     public Acquisto updateById(long id, AcquistoDTO acquistoDTO){

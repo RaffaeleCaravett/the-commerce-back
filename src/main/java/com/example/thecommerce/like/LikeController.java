@@ -29,7 +29,7 @@ public class LikeController {
     }
 
 
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('VENDITORE','UTENTE')")
     public Like findById(@PathVariable int id)  {
         return likeService.findById(id);
@@ -59,18 +59,11 @@ public class LikeController {
     }
     @PostMapping("")
     @PreAuthorize("hasAnyAuthority('VENDITORE','UTENTE')")
-    public String saveLike(@RequestBody @Validated LikeDTO body, BindingResult validation){
+    public String saveLike(@RequestBody @Validated LikeDTO body, BindingResult validation)  {
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         } else {
-            try {
-                //Like l =
-
-                //  RatingResponseDTO ratingResponseDTO = new RatingResponseDTO(rating.getArgument().getTitle(),rating.getUser().getId(),rating.getRating());
-                return  likeService.registerLike(body);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+                return likeService.registerLike(body);
         }
     }
 

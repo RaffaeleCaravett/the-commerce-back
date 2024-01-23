@@ -13,4 +13,5 @@ public interface LikeRepository extends JpaRepository<Like,Long> {
     List<Like> findByUser_Id(long userId);
     Like findByProduct_IdAndUser_Id(Long productId, Long userId);
 
+
 }

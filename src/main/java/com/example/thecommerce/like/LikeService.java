@@ -5,11 +5,14 @@ import com.example.thecommerce.payloads.entities.LikeDTO;
 import com.example.thecommerce.payloads.entities.LikeResponseDTO;
 import com.example.thecommerce.product.ProductRepository;
 import com.example.thecommerce.user.UserRepository;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
@@ -24,31 +27,19 @@ public class LikeService {
     UserRepository userRepository;
 
 
-    public String registerLike(LikeDTO body) throws IOException {
-
-        AtomicReference<String> result = new AtomicReference<>("");
-
-        Like newLike = new Like();
-        newLike.setProduct(productRepository.findById(body.product_id()).get());
-        newLike.setUser(userRepository.findById(body.user_id()).get());
-
-        List<Like> likes = this.findAll();
-
-        if (likes.isEmpty()) {
-            likeRepository.save(newLike);
-            result.set("created");
-        } else {
-            for (Like like : likes) {
-                if (like.getProduct().getId() == body.product_id() && like.getUser().getId() == body.user_id()) {
-                    result.set("deleted");
-                    this.findByIdAndDelete(like.getId());
-                }
-            }
-        }
-        if(!Objects.equals(result.get(), "deleted")){
-            likeRepository.save(newLike);
-        }
-        return result.get();
+    public String registerLike(LikeDTO body) {
+Like like = likeRepository.findByProduct_IdAndUser_Id(body.product_id(), body.user_id());
+if(like ==null){
+    Like like1= new Like();
+    like1.setProduct(productRepository.findById(body.product_id()).get());
+    like1.setUser(userRepository.findById(body.user_id()).get());
+    like1.setCreated_at(LocalDate.now());
+     likeRepository.save(like1);
+     return "Prodotto aggiunto ai preferiti";
+}else {
+    this.findByIdAndDelete(like.getId());
+    return "Prodotto rimosso dai preferiti.";
+}
     }
 
     private LikeResponseDTO mapToLikeResponseDTO(Like like) {
