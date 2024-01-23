@@ -62,7 +62,10 @@ public Carrello updateById(long id, CarrelloDTO carrelloDTO){
         for(Long l: carrelloDTO.products_id()){
             products.add(productRepository.findById(l).get());
         }
-        carrello.setProducts(products);
+        for(Product p : products){
+            carrello.getProducts().add(p);
+        }
+
 return carrelloRepository.save(carrello);
 }
 
