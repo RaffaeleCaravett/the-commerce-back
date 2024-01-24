@@ -63,10 +63,9 @@ UserRepository userRepository;
         Rating found = this.findById(id);
         ratingRepository.delete(found);
     }
-    public Page<Rating> findByProductId(long id,int page, int size, String orderBy)throws NotFoundException{
-        Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
+    public List<Rating> findByProductId(long id)throws NotFoundException{
 
-        Page<Rating> pageableRating = ratingRepository.findByProductId(id,pageable);
+        List<Rating> pageableRating = ratingRepository.findByProductId(id);
 
 
         //  return pageableRating.stream()

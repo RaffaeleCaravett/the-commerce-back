@@ -80,8 +80,8 @@ public class RatingController {
 
     @GetMapping("/product/{id}")
     @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
-    public Page<Rating> findByArgumentName(@PathVariable long id)  {
-        return ratingService.findByProductId(id,1,5,"id");
+    public List<Rating> findByProductId(@PathVariable long id)  {
+        return ratingService.findByProductId(id);
     }
     @GetMapping("/user/{userId}")
     @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")

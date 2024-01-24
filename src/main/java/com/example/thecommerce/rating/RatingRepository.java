@@ -14,6 +14,6 @@ public interface RatingRepository extends JpaRepository<Rating,Long> {
     List<Rating> findByUserId(long userId);
 
     Page<Rating> findByUserId(long userId,Pageable pageable);
-    Page<Rating> findByProductId(long productId,Pageable pageable);
+    List<Rating> findByProductId(long productId);
 
 }

@@ -18,7 +18,7 @@ public class CommentPredefinedController {
     CommentPredefinedService commentPredefinedService;
 
     @PostMapping("")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
 public CommentPredefined save(@RequestBody @Validated CommentPredefinedDTO commentPredefinedDTO, BindingResult validation){
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
@@ -33,22 +33,22 @@ public CommentPredefined save(@RequestBody @Validated CommentPredefinedDTO comme
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
    public CommentPredefined updateById(@PathVariable long id, @RequestBody CommentPredefinedDTO commentPredefinedDTO){
         return commentPredefinedService.updateById(id,commentPredefinedDTO);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
 public boolean deleteById(@PathVariable long id){
         return commentPredefinedService.deleteById(id);
     }
 
-@GetMapping("/{userId}")
+@GetMapping("/user/{userId}")
     public List<CommentPredefined> getAllByUserId(@PathVariable long userId){
         return commentPredefinedService.getAllByUserId(userId);
 }
-    @GetMapping("/{productId}")
+    @GetMapping("/product/{productId}")
     public List<CommentPredefined> getAllByProductId(@PathVariable long productId){
         return commentPredefinedService.getAllByProductId(productId);
     }

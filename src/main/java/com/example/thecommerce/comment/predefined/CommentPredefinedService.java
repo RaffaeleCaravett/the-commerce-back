@@ -24,6 +24,9 @@ public class CommentPredefinedService {
         CommentPredefined commentPredefined= new CommentPredefined();
         commentPredefined.setTesto(commentPredefinedDTO.testo());
         commentPredefined.setCreated_at(LocalDate.now());
+
+        commentPredefined.getUsers().add(userRepository.findById(commentPredefinedDTO.user_id()).get());
+        commentPredefined.getProducts().add(productRepository.findById(commentPredefinedDTO.product_id()).get());
         return commentPredefinedRepository.save(commentPredefined);
     }
 
@@ -42,16 +45,7 @@ public class CommentPredefinedService {
         CommentPredefined commentPredefined= commentPredefinedRepository.findById(id).orElseThrow(() -> new NotFoundException("Commento predefinito non trovato"));
 
 commentPredefined.setTesto(commentPredefinedDTO.testo());
-if(!commentPredefinedDTO.user_id_list().isEmpty()){
-    for(Long l :commentPredefinedDTO.user_id_list()){
-        commentPredefined.getUsers().add(userRepository.findById(l).get());
-    }
-}
-        if(!commentPredefinedDTO.product_id_list().isEmpty()){
-            for(Long l :commentPredefinedDTO.product_id_list()){
-                commentPredefined.getProducts().add(productRepository.findById(l).get());
-            }
-        }
+
 
         return commentPredefinedRepository.save(commentPredefined);
     }

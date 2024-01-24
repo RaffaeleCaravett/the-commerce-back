@@ -20,7 +20,7 @@ public class CommentUserController {
     CommentUserService commentUserService;
 
     @PostMapping("")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public CommentUser save(@RequestBody @Validated CommentUserDTO commentUserDTO, BindingResult validation){
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
@@ -35,22 +35,22 @@ public class CommentUserController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public CommentUser updateById(@PathVariable long id, @RequestBody CommentUserDTO commentUserDTO){
         return commentUserService.updateById(id,commentUserDTO);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('UTENTE','VENDITORE')")
     public boolean deleteById(@PathVariable long id){
         return commentUserService.deleteById(id);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public List<CommentUser> getAllByUserId(@PathVariable long userId){
         return commentUserService.getAllByUserId(userId);
     }
-    @GetMapping("/{productId}")
+    @GetMapping("/product/{productId}")
     public List<CommentUser> getAllByProductId(@PathVariable long productId){
         return commentUserService.getAllByProductId(productId);
     }

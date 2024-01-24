@@ -26,6 +26,9 @@ public class CommentUserService {
         CommentUser commentUser= new CommentUser();
         commentUser.setTesto(commentUserDTO.testo());
         commentUser.setCreated_at(LocalDate.now());
+        commentUser.setUser(userRepository.findById(commentUserDTO.user_id()).get());
+        commentUser.setProduct(productRepository.findById(commentUserDTO.product_id()).get());
+
         return commentUserRepository.save(commentUser);
     }
 
@@ -44,10 +47,6 @@ public class CommentUserService {
         CommentUser commentUser= commentUserRepository.findById(id).orElseThrow(() -> new NotFoundException("Commento non trovato"));
 
         commentUser.setTesto(commentUserDTO.testo());
-
-                commentUser.setUser(userRepository.findById(commentUserDTO.user_id()).get());
-                commentUser.setProduct(productRepository.findById(commentUserDTO.product_id()).get());
-
 
         return commentUserRepository.save(commentUser);
     }
