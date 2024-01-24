@@ -70,4 +70,9 @@ public Product updateById(@PathVariable int id, @RequestPart("productDTO") @Vali
             return false;
         }
     }
+
+    @GetMapping("/nome/{nome}")
+    public List<Product> findByNomeContaining(@PathVariable String nome){
+        return productService.findByNomeContaining(nome);
+    }
 }

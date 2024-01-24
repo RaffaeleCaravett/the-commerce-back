@@ -117,5 +117,7 @@ return product1;
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
         return productRepository.findAll(pageable);
     }
-
+public List<Product> findByNomeContaining(String nome){
+        return productRepository.findByNomeContainingIgnoreCase(nome);
+}
 }
